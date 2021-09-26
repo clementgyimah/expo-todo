@@ -3,7 +3,6 @@ import { FlatList, Text, View } from 'react-native';
 import { todoListStyle } from '../assets/styles/styles';
 import todoList from '../database/todoList.json';
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
-// import { addTodo } from '../functions/addTodo';
 import FeatherIcon from '@expo/vector-icons/Feather';
 import { verifyDb } from '../functions/verifyDb';
 import { addTodo } from '../functions/addTodo';
@@ -42,7 +41,6 @@ export const TodoList = ({ navigation }) => {
 
     const addTodoFunc = () => {
         setShowModal(true);
-        // addTodo({name, age});
     }
 
     return (

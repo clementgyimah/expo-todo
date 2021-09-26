@@ -77,7 +77,8 @@ export const todoListModalStyle = StyleSheet.create({
     },
     contentView: {
         flex: 1,
-        paddingHorizontal: 15
+        paddingHorizontal: 15,
+        paddingVertical: 20,
     },
     titleText: {
         fontSize: 20,
@@ -92,6 +93,15 @@ export const todoListModalStyle = StyleSheet.create({
         paddingHorizontal: 15,
         marginVertical: 10
     },
+    nameInputError: {
+        width: '80%',
+        height: 40,
+        backgroundColor: 'rgba(255, 210, 217, 0.8)',
+        fontSize: 15,
+        borderRadius: 200,
+        paddingHorizontal: 15,
+        marginTop: 10
+    },
     textInput: {
         width: '80%',
         height: 100,
@@ -101,5 +111,39 @@ export const todoListModalStyle = StyleSheet.create({
         paddingHorizontal: 15,
         paddingVertical: 5,
         marginVertical: 10,
+    },
+    textInputError: {
+        width: '80%',
+        height: 100,
+        backgroundColor: 'rgba(255, 210, 217, 0.8)',
+        fontSize: 15,
+        borderRadius: 10,
+        paddingHorizontal: 15,
+        paddingVertical: 5,
+        marginTop: 10,
+    },
+    saveButtonView: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginVertical: 10,
+    },
+    saveButton: {
+        backgroundColor: 'blue',
+        width: 100,
+        height: 30,
+        borderRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    saveButtonText: {
+        color: 'white',
+        fontSize: 15
+    },
+    inputErrorText: {
+        fontSize: 13,
+        color: 'red',
+        marginBottom: 10,
+        marginHorizontal: 5
+
     }
 })
