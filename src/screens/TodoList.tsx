@@ -7,6 +7,7 @@ import FeatherIcon from '@expo/vector-icons/Feather';
 import { verifyDb } from '../functions/verifyDb';
 import { addTodo } from '../functions/addTodo';
 import TodoListModal from '../components/TodoListModal';
+import {flatListItems} from '../types/TsTypes';
 
 export const TodoList = ({ navigation }) => {
     const [name, setName] = useState('');
@@ -45,13 +46,13 @@ export const TodoList = ({ navigation }) => {
 
     return (
         <View style={todoListStyle.container}>
-            <FlatList data={theDataArray} renderItem={eachObject => (
+            <FlatList data={theDataArray} renderItem={(eachObject) => (
                 <View style={todoListStyle.eachRowView}>
                     <View style={todoListStyle.textView}><Text style={todoListStyle.nameText}>{eachObject.item.name}: <Text style={todoListStyle.ageText}>{eachObject.item.age}</Text></Text></View>
                     <View style={todoListStyle.deleteIconView}><Icon name='delete' size={25} color='red' /></View>
                 </View>
             )}
-                keyExtractor={item => item.name}
+                keyExtractor={(item:flatListItems) => item.name}
             />
             { showModal &&
                 <TodoListModal showModal={showModal} closeModal={() => closeModal()} />

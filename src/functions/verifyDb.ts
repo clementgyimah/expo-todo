@@ -1,9 +1,6 @@
 import * as SQLite from 'expo-sqlite';
 import { SQLError } from 'expo-sqlite';
-
-interface transactionFunctions {
-    executeSql: Function
-}
+import {transactionFunctions} from '../types/TsTypes';
 
 const verifyTheDb = (tx: transactionFunctions) => {
     tx.executeSql(`CREATE TABLE IF NOT EXISTS users (Name VARCHAR(100) PRIMARY KEY NOT NULL, Age INT(100))`);

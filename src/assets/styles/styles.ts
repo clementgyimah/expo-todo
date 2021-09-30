@@ -91,7 +91,6 @@ export const todoListModalStyle = StyleSheet.create({
         fontSize: 15,
         borderRadius: 200,
         paddingHorizontal: 15,
-        marginVertical: 10
     },
     nameInputError: {
         width: '80%',
@@ -100,6 +99,13 @@ export const todoListModalStyle = StyleSheet.create({
         fontSize: 15,
         borderRadius: 200,
         paddingHorizontal: 15,
+    },
+    inputView: {
+        flexDirection: 'row',
+        marginVertical: 10,
+    },
+    inputViewError: {
+        flexDirection: 'row',
         marginTop: 10
     },
     textInput: {
@@ -110,7 +116,6 @@ export const todoListModalStyle = StyleSheet.create({
         borderRadius: 10,
         paddingHorizontal: 15,
         paddingVertical: 5,
-        marginVertical: 10,
     },
     textInputError: {
         width: '80%',
@@ -120,7 +125,11 @@ export const todoListModalStyle = StyleSheet.create({
         borderRadius: 10,
         paddingHorizontal: 15,
         paddingVertical: 5,
-        marginTop: 10,
+    },
+    requiredText: {
+        marginLeft: 5,
+        color: 'red',
+        fontSize: 20
     },
     saveButtonView: {
         justifyContent: 'center',
