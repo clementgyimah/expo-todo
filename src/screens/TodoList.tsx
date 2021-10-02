@@ -6,8 +6,9 @@ import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import FeatherIcon from '@expo/vector-icons/Feather';
 import { verifyDb } from '../functions/verifyDb';
 import { addTodo } from '../functions/addTodo';
+import { getAllTodos } from '../functions/getTodo';
 import TodoListModal from '../components/TodoListModal';
-import {flatListItems} from '../types/TsTypes';
+import { flatListItems } from '../types/TsTypes';
 
 export const TodoList = ({ navigation }) => {
     const [name, setName] = useState('');
@@ -18,22 +19,25 @@ export const TodoList = ({ navigation }) => {
     useEffect(() => {
         navigation.setOptions({
             headerRight: () => <View style={todoListStyle.headerRightView}>
-            <FeatherIcon
-             name='plus-circle'
-              size={25} color='#0800ffab'
-              onPress={() => addTodoFunc()} />
-          </View>
+                <FeatherIcon
+                    name='plus-circle'
+                    size={25} color='#0800ffab'
+                    onPress={() => addTodoFunc()} />
+            </View>
         })
         getTodoList();
         verifyDb();
     }, []);
 
     const getTodoList = () => {
+        getAllTodos({ setTheDataArray: (theArray: never[]) => setTheDataArray(theArray) });
+        /*
         let dataArray = [] as any;
         // for(const i in todoList) dataArray.push({name: i, age: todoList[i]});
         for (const i in todoList) dataArray.push({ name: i, age: todoList[i] });
         // console.log(dataArray);
         setTheDataArray(dataArray);
+        */
     }
 
     const closeModal = () => {
@@ -48,13 +52,19 @@ export const TodoList = ({ navigation }) => {
         <View style={todoListStyle.container}>
             <FlatList data={theDataArray} renderItem={(eachObject) => (
                 <View style={todoListStyle.eachRowView}>
-                    <View style={todoListStyle.textView}><Text style={todoListStyle.nameText}>{eachObject.item.name}: <Text style={todoListStyle.ageText}>{eachObject.item.age}</Text></Text></View>
-                    <View style={todoListStyle.deleteIconView}><Icon name='delete' size={25} color='red' /></View>
+                    <View style={todoListStyle.textView}>
+                        <Text style={todoListStyle.nameText}>{eachObject.item.title}:
+                            <Text style={todoListStyle.ageText}>{eachObject.item.content}</Text>
+                        </Text>
+                    </View>
+                    <View style={todoListStyle.deleteIconView}>
+                        <Icon name='delete' size={25} color='red' />
+                    </View>
                 </View>
             )}
-                keyExtractor={(item:flatListItems) => item.name}
+                keyExtractor={(item: flatListItems) => item.title}
             />
-            { showModal &&
+            {showModal &&
                 <TodoListModal showModal={showModal} closeModal={() => closeModal()} />
             }
         </View>

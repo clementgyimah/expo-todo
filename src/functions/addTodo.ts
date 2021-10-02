@@ -1,29 +1,26 @@
 import * as SQLite from 'expo-sqlite';
-import {userData} from '../types/TsTypes';
+import { userData } from '../types/TsTypes';
+import dbError from './error/dbError';
+import txnSuccess from './success/txnSuccess';
 
 
 const insertSuccess = (response: SQLite.SQLTransaction) => {
     console.log('User added successfully: ', response);
 }
 
-const insertError = (err: SQLite.SQLTransaction) => {
-    console.log('Adding new user error: ', err);
-}
-
 const addUserCallback = (tx: SQLite.SQLTransaction, props: userData) => {
     tx.executeSql(
         `INSERT INTO users VALUES('${props.name}', '${props.text}')`,
-         [], 
-         (res) => insertSuccess(res), 
-         (e) => insertError(e))
+        [],
+        (res) => insertSuccess(res),
+        (err) => dbError('Error in getting all data from database', err)
+    );
 }
 
-const errorHandler = (err:SQLite.SQLError) => console.log(': ', err);
-const successHandler = () => console.log('Transaction started successfully...');
-
-export const addTodo = ({...props}) => {
+export const addTodo = ({ ...props }) => {
     const db = SQLite.openDatabase('todoList');
-    db.transaction((p) => addUserCallback(p, props), (e) => errorHandler(e), () => successHandler())
+    db.transaction((p) => addUserCallback(p, props),
+        (err) => dbError('Transaction Error in insert data into database', err),
+        () => txnSuccess('Transaction for inserting data into database started successfully...')
+    );
 }
-
-// "postinstall": "node_modules/.bin/rn-nodeify --install fs,os,events,util,stream,path --hack"
