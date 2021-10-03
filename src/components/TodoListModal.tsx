@@ -5,37 +5,37 @@ import { addTodo } from '../functions/addTodo';
 import { todoListModalStyle } from '../assets/styles/styles';
 
 export default function TodoListModal({ ...props }) {
-    const [name, setName] = useState('');
-    const [text, setText] = useState('');
-    const [nameError, setNameError] = useState(false);
-    const [textError, setTextError] = useState(false);
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+    const [titleError, setTitleError] = useState(false);
+    const [contentError, setContentError] = useState(false);
 
     const saveTodo = () => {
-        if (name.length <= 0) setNameError(true);
-        else if (text.length <= 0) setTextError(true);
+        if (title.length <= 0) setTitleError(true);
+        else if (content.length <= 0) setContentError(true);
         else {
-            addTodo({name, text});
+            addTodo({title, content});
             clearInputs();
         }
     };
 
     const resetInputErrors = () => {
-        if (nameError) return setNameError(false);
-        if (textError) return setTextError(false);
+        if (titleError) return setTitleError(false);
+        if (contentError) return setContentError(false);
     };
 
     const clearInputs = () => {
-        setName('');
-        setText('');
+        setTitle('');
+        setContent('');
     };
 
-    const nameInputFunc = (theName: string) => {
-        setName(theName);
+    const titleInputFunc = (theTitle: string) => {
+        setTitle(theTitle);
         resetInputErrors();
     };
 
-    const textInputFunc = (theText: string) => {
-        setText(theText);
+    const contentInputFunc = (theContent: string) => {
+        setContent(theContent);
         resetInputErrors();
     };
 
@@ -57,36 +57,36 @@ export default function TodoListModal({ ...props }) {
                 </View>
                 <View style={todoListModalStyle.contentView}>
                     <ScrollView>
-                        <View style={nameError ?
+                        <View style={titleError ?
                             todoListModalStyle.inputViewError :
                             todoListModalStyle.inputView}>
                             <TextInput
-                                style={todoListModalStyle.nameInput}
+                                style={todoListModalStyle.titleInput}
                                 placeholder='Title'
-                                value={name}
-                                onChangeText={(theName) => nameInputFunc(theName)}
+                                value={title}
+                                onChangeText={(theTitle) => titleInputFunc(theTitle)}
                             />
                             <Text style={todoListModalStyle.requiredText}>*</Text>
                         </View>
                         {
-                            nameError &&
-                            <Text style={todoListModalStyle.inputErrorText}>'Name' cannot be empty</Text>
+                            titleError &&
+                            <Text style={todoListModalStyle.inputErrorText}>'Title' cannot be empty</Text>
                         }
-                        <View style={textError ?
+                        <View style={contentError ?
                             todoListModalStyle.inputViewError :
                             todoListModalStyle.inputView}>
                             <TextInput
-                                style={todoListModalStyle.textInput}
+                                style={todoListModalStyle.contentInput}
                                 placeholder='Text'
-                                value={text}
-                                onChangeText={(theText) => textInputFunc(theText)}
+                                value={content}
+                                onChangeText={(theContent) => contentInputFunc(theContent)}
                                 multiline
                             />
                             <Text style={todoListModalStyle.requiredText}>*</Text>
                         </View>
                         {
-                            textError &&
-                            <Text style={todoListModalStyle.inputErrorText}>'Text' cannot be empty</Text>
+                            contentError &&
+                            <Text style={todoListModalStyle.inputErrorText}>'Content' cannot be empty</Text>
                         }
                         <View style={todoListModalStyle.saveButtonView}>
                             <TouchableOpacity

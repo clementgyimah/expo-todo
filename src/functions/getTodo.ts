@@ -5,7 +5,7 @@ import dbError from './error/dbError';
 import txnSuccess from './success/txnSuccess';
 
 const getDataSuccess = (transaction: SQLite.SQLTransaction, results: SQLite.SQLResultSet, props: userData) => {
-    // console.log('All data gotten successfully: ', results.rows._array);
+    console.log('All data gotten successfully: ', results.rows._array);
     props.setTheDataArray(results.rows._array);
     // return theDataObj = results;
 }
@@ -13,6 +13,7 @@ const getDataSuccess = (transaction: SQLite.SQLTransaction, results: SQLite.SQLR
 const getAllTodosCallback = (tx: SQLite.SQLTransaction, props: userData) => {
     tx.executeSql(
         `SELECT * FROM users`,
+        // `DROP TABLE users`,
         [],
         (tran, res) => getDataSuccess(tran, res, props),
         (err) => dbError('Error in getting all data from database', err)

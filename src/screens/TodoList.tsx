@@ -53,8 +53,8 @@ export const TodoList = ({ navigation }) => {
             <FlatList data={theDataArray} renderItem={(eachObject) => (
                 <View style={todoListStyle.eachRowView}>
                     <View style={todoListStyle.textView}>
-                        <Text style={todoListStyle.nameText}>{eachObject.item.title}:
-                            <Text style={todoListStyle.ageText}>{eachObject.item.content}</Text>
+                        <Text style={todoListStyle.nameText}>
+                            {eachObject.item.Title}
                         </Text>
                     </View>
                     <View style={todoListStyle.deleteIconView}>
@@ -62,7 +62,7 @@ export const TodoList = ({ navigation }) => {
                     </View>
                 </View>
             )}
-                keyExtractor={(item: flatListItems) => item.title}
+                keyExtractor={(item: flatListItems) => item.Title}
             />
             {showModal &&
                 <TodoListModal showModal={showModal} closeModal={() => closeModal()} />

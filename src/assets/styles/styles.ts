@@ -84,7 +84,7 @@ export const todoListModalStyle = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold'
     },
-    nameInput: {
+    titleInput: {
         width: '80%',
         height: 40,
         backgroundColor: 'rgba(255, 210, 217, 0.8)',
@@ -92,6 +92,7 @@ export const todoListModalStyle = StyleSheet.create({
         borderRadius: 200,
         paddingHorizontal: 15,
     },
+    /*
     nameInputError: {
         width: '80%',
         height: 40,
@@ -100,6 +101,7 @@ export const todoListModalStyle = StyleSheet.create({
         borderRadius: 200,
         paddingHorizontal: 15,
     },
+    */
     inputView: {
         flexDirection: 'row',
         marginVertical: 10,
@@ -108,7 +110,7 @@ export const todoListModalStyle = StyleSheet.create({
         flexDirection: 'row',
         marginTop: 10
     },
-    textInput: {
+    contentInput: {
         width: '80%',
         height: 100,
         backgroundColor: 'rgba(255, 210, 217, 0.8)',
@@ -117,7 +119,8 @@ export const todoListModalStyle = StyleSheet.create({
         paddingHorizontal: 15,
         paddingVertical: 5,
     },
-    textInputError: {
+    /*
+    contentInputError: {
         width: '80%',
         height: 100,
         backgroundColor: 'rgba(255, 210, 217, 0.8)',
@@ -126,6 +129,7 @@ export const todoListModalStyle = StyleSheet.create({
         paddingHorizontal: 15,
         paddingVertical: 5,
     },
+    */
     requiredText: {
         marginLeft: 5,
         color: 'red',

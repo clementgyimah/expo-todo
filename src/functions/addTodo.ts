@@ -3,16 +3,11 @@ import { userData } from '../types/TsTypes';
 import dbError from './error/dbError';
 import txnSuccess from './success/txnSuccess';
 
-
-const insertSuccess = (response: SQLite.SQLTransaction) => {
-    console.log('User added successfully: ', response);
-}
-
 const addUserCallback = (tx: SQLite.SQLTransaction, props: userData) => {
     tx.executeSql(
-        `INSERT INTO users VALUES('${props.name}', '${props.text}')`,
+        `INSERT INTO users VALUES('${props.title}', '${props.content}')`,
         [],
-        (res) => insertSuccess(res),
+        () => txnSuccess('User added successfully'),
         (err) => dbError('Error in getting all data from database', err)
     );
 }

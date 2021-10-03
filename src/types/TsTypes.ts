@@ -1,6 +1,6 @@
 export interface flatListItems {
-    title: string,
-    content: number
+    Title: string,
+    Content: number
 }
 
 export interface userData {
