@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, Text, View, TouchableOpacity } from 'react-native';
 import { todoListStyle } from '../assets/styles/styles';
-import todoList from '../database/todoList.json';
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import FeatherIcon from '@expo/vector-icons/Feather';
 import { verifyDb } from '../functions/verifyDb';
-import { addTodo } from '../functions/addTodo';
 import { getAllTodos } from '../functions/getTodo';
 import TodoListModal from '../components/TodoListModal';
 import { flatListItems } from '../types/TsTypes';
@@ -15,6 +13,7 @@ export const TodoList = ({ navigation }) => {
     const [age, setAge] = useState('');
     const [theDataArray, setTheDataArray] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [reloadToggler, setReloadToggler] = useState(false);
 
     useEffect(() => {
         navigation.setOptions({
@@ -27,7 +26,7 @@ export const TodoList = ({ navigation }) => {
         })
         getTodoList();
         verifyDb();
-    }, []);
+    }, [reloadToggler]);
 
     const getTodoList = () => {
         getAllTodos({ setTheDataArray: (theArray: never[]) => setTheDataArray(theArray) });
@@ -51,7 +50,7 @@ export const TodoList = ({ navigation }) => {
     return (
         <View style={todoListStyle.container}>
             <FlatList data={theDataArray} renderItem={(eachObject) => (
-                <View style={todoListStyle.eachRowView}>
+                <TouchableOpacity style={todoListStyle.eachRowView}>
                     <View style={todoListStyle.textView}>
                         <Text style={todoListStyle.nameText}>
                             {eachObject.item.Title}
@@ -60,12 +59,12 @@ export const TodoList = ({ navigation }) => {
                     <View style={todoListStyle.deleteIconView}>
                         <Icon name='delete' size={25} color='red' />
                     </View>
-                </View>
+                </TouchableOpacity>
             )}
-                keyExtractor={(item: flatListItems) => item.Title}
+                keyExtractor={(item: flatListItems) => item.UUID}
             />
             {showModal &&
-                <TodoListModal showModal={showModal} closeModal={() => closeModal()} />
+                <TodoListModal showModal={showModal} closeModal={() => closeModal()} reloadList={() => setReloadToggler(!reloadToggler)} />
             }
         </View>
     )

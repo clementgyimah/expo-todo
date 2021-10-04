@@ -2,10 +2,11 @@ import * as SQLite from 'expo-sqlite';
 import { userData } from '../types/TsTypes';
 import dbError from './error/dbError';
 import txnSuccess from './success/txnSuccess';
+import UUID from 'react-native-uuid';
 
 const addUserCallback = (tx: SQLite.SQLTransaction, props: userData) => {
     tx.executeSql(
-        `INSERT INTO users VALUES('${props.title}', '${props.content}')`,
+        `INSERT INTO users VALUES('${UUID.v4()}', '${props.title}', '${props.content}')`,
         [],
         () => txnSuccess('User added successfully'),
         (err) => dbError('Error in getting all data from database', err)

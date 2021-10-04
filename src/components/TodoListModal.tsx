@@ -16,6 +16,8 @@ export default function TodoListModal({ ...props }) {
         else {
             addTodo({title, content});
             clearInputs();
+            props.reloadList();
+            props.closeModal();
         }
     };
 
@@ -77,7 +79,7 @@ export default function TodoListModal({ ...props }) {
                             todoListModalStyle.inputView}>
                             <TextInput
                                 style={todoListModalStyle.contentInput}
-                                placeholder='Text'
+                                placeholder='Content'
                                 value={content}
                                 onChangeText={(theContent) => contentInputFunc(theContent)}
                                 multiline

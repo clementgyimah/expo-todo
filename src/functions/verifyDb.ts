@@ -3,7 +3,7 @@ import { SQLError } from 'expo-sqlite';
 import {transactionFunctions} from '../types/TsTypes';
 
 const verifyTheDb = (tx: transactionFunctions) => {
-    tx.executeSql(`CREATE TABLE IF NOT EXISTS users (Title VARCHAR(100) PRIMARY KEY NOT NULL, Content INT(100))`);
+    tx.executeSql(`CREATE TABLE IF NOT EXISTS users (ID VARCHAR(50) PRIMARY KEY NOT NULL, Title VARCHAR(100), Content INT(100))`);
 }
 
 const errorHandler = (err:SQLError) => console.log('Tables verification error: ', err);
