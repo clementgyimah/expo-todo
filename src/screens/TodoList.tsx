@@ -6,6 +6,7 @@ import FeatherIcon from '@expo/vector-icons/Feather';
 import { verifyDb } from '../functions/verifyDb';
 import { getAllTodos } from '../functions/getTodo';
 import TodoListModal from '../components/TodoListModal';
+import TodoDetailModal from '../components/TodoDetailModal';
 import { flatListItems } from '../types/TsTypes';
 
 export const TodoList = ({ navigation }) => {
@@ -13,6 +14,7 @@ export const TodoList = ({ navigation }) => {
     const [age, setAge] = useState('');
     const [theDataArray, setTheDataArray] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [showTodoDetailModal, setShowTodoDetailModal] = useState(false);
     const [reloadToggler, setReloadToggler] = useState(false);
 
     useEffect(() => {
@@ -43,14 +45,25 @@ export const TodoList = ({ navigation }) => {
         setShowModal(false);
     }
 
+    const closeTodoDetailModal = () => {
+        setShowTodoDetailModal(false);
+    }
+
     const addTodoFunc = () => {
         setShowModal(true);
+    }
+
+    const showTodoModal = () => {
+        setShowTodoDetailModal(true)
     }
 
     return (
         <View style={todoListStyle.container}>
             <FlatList data={theDataArray} renderItem={(eachObject) => (
-                <TouchableOpacity style={todoListStyle.eachRowView}>
+                <TouchableOpacity
+                    style={todoListStyle.eachRowView}
+                    activeOpacity={0.6}
+                    onPress={() => showTodoModal()}>
                     <View style={todoListStyle.textView}>
                         <Text style={todoListStyle.nameText}>
                             {eachObject.item.Title}
@@ -65,6 +78,9 @@ export const TodoList = ({ navigation }) => {
             />
             {showModal &&
                 <TodoListModal showModal={showModal} closeModal={() => closeModal()} reloadList={() => setReloadToggler(!reloadToggler)} />
+            }
+            {showTodoDetailModal &&
+                <TodoDetailModal showModal={showTodoDetailModal} closeModal={() => closeTodoDetailModal()} />
             }
         </View>
     )

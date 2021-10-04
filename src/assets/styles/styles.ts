@@ -160,3 +160,23 @@ export const todoListModalStyle = StyleSheet.create({
 
     }
 })
+
+export const TodoDetailModalStyle = StyleSheet.create({
+    container: {
+        position: 'absolute',
+        flex: 1,
+        width: '100%',
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0.5)'
+    },
+    containerNull: {
+        display: 'none'
+    },
+    modalContainer: {
+        backgroundColor: 'white',
+        width: '70%',
+        height: '70%'
+    }
+})
