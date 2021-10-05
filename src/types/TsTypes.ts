@@ -1,5 +1,5 @@
 export interface flatListItems {
-    UUID: string,
+    ID: string,
     Title: string,
     Content: number
 }

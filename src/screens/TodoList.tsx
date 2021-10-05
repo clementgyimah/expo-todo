@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FlatList, Text, View, TouchableOpacity } from 'react-native';
+import { FlatList, Text, View, TouchableOpacity, ListRenderItem, ListRenderItemInfo } from 'react-native';
 import { todoListStyle } from '../assets/styles/styles';
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import FeatherIcon from '@expo/vector-icons/Feather';
@@ -8,14 +8,14 @@ import { getAllTodos } from '../functions/getTodo';
 import TodoListModal from '../components/TodoListModal';
 import TodoDetailModal from '../components/TodoDetailModal';
 import { flatListItems } from '../types/TsTypes';
+import { removeTodo } from '../functions/removeTodo';
 
 export const TodoList = ({ navigation }) => {
-    const [name, setName] = useState('');
-    const [age, setAge] = useState('');
     const [theDataArray, setTheDataArray] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [showTodoDetailModal, setShowTodoDetailModal] = useState(false);
     const [reloadToggler, setReloadToggler] = useState(false);
+    const [todoDetailObject, setTodoDetailObject] = useState({});
 
     useEffect(() => {
         navigation.setOptions({
@@ -32,13 +32,6 @@ export const TodoList = ({ navigation }) => {
 
     const getTodoList = () => {
         getAllTodos({ setTheDataArray: (theArray: never[]) => setTheDataArray(theArray) });
-        /*
-        let dataArray = [] as any;
-        // for(const i in todoList) dataArray.push({name: i, age: todoList[i]});
-        for (const i in todoList) dataArray.push({ name: i, age: todoList[i] });
-        // console.log(dataArray);
-        setTheDataArray(dataArray);
-        */
     }
 
     const closeModal = () => {
@@ -53,8 +46,14 @@ export const TodoList = ({ navigation }) => {
         setShowModal(true);
     }
 
-    const showTodoModal = () => {
-        setShowTodoDetailModal(true)
+    const showTodoModal = (todoDetail: ListRenderItemInfo<flatListItems>) => {
+        setShowTodoDetailModal(true);
+        setTodoDetailObject(todoDetail);
+    }
+
+    const removeTodoFunc = (todoID: string) => {
+        console.log(todoID);
+        removeTodo({todoID, reloadTodoList: () => setReloadToggler(!reloadToggler)});
     }
 
     return (
@@ -63,24 +62,31 @@ export const TodoList = ({ navigation }) => {
                 <TouchableOpacity
                     style={todoListStyle.eachRowView}
                     activeOpacity={0.6}
-                    onPress={() => showTodoModal()}>
+                    onPress={() => showTodoModal(eachObject)}>
                     <View style={todoListStyle.textView}>
                         <Text style={todoListStyle.nameText}>
                             {eachObject.item.Title}
                         </Text>
                     </View>
                     <View style={todoListStyle.deleteIconView}>
-                        <Icon name='delete' size={25} color='red' />
+                        <Icon name='delete' size={25} color='#F94144' onPress={() => removeTodoFunc(eachObject.item.ID)} />
                     </View>
                 </TouchableOpacity>
             )}
-                keyExtractor={(item: flatListItems) => item.UUID}
+                keyExtractor={(item: flatListItems) => item.ID}
             />
             {showModal &&
-                <TodoListModal showModal={showModal} closeModal={() => closeModal()} reloadList={() => setReloadToggler(!reloadToggler)} />
+                <TodoListModal
+                    showModal={showModal}
+                    closeModal={() => closeModal()}
+                    reloadList={() => setReloadToggler(!reloadToggler)} />
             }
             {showTodoDetailModal &&
-                <TodoDetailModal showModal={showTodoDetailModal} closeModal={() => closeTodoDetailModal()} />
+                <TodoDetailModal
+                    showModal={showTodoDetailModal}
+                    closeModal={() => closeTodoDetailModal()}
+                    todoDetailObject={todoDetailObject}
+                />
             }
         </View>
     )

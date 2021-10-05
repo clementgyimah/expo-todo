@@ -17,7 +17,7 @@ export default function TodoListModal({ ...props }) {
             addTodo({title, content});
             clearInputs();
             props.reloadList();
-            props.closeModal();
+            return props.closeModal();
         }
     };
 
@@ -28,17 +28,17 @@ export default function TodoListModal({ ...props }) {
 
     const clearInputs = () => {
         setTitle('');
-        setContent('');
+        return setContent('');
     };
 
     const titleInputFunc = (theTitle: string) => {
         setTitle(theTitle);
-        resetInputErrors();
+        return resetInputErrors();
     };
 
     const contentInputFunc = (theContent: string) => {
         setContent(theContent);
-        resetInputErrors();
+        return resetInputErrors();
     };
 
     return (

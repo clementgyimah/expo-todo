@@ -15,7 +15,7 @@ export const todoListStyle = StyleSheet.create({
     eachRowView: {
         height: 50,
         width: 300,
-        backgroundColor: '#00ffff96',
+        backgroundColor: '#F0EFEB',
         marginTop: 10,
         alignItems: 'center',
         borderRadius: 10,
@@ -178,5 +178,27 @@ export const TodoDetailModalStyle = StyleSheet.create({
         backgroundColor: 'white',
         width: '70%',
         height: '70%'
+    },
+    titleView: {
+        width: '100%',
+        // backgroundColor: '#CDDAFD',
+        borderBottomWidth: 1,
+        borderBottomColor: '#4d4747',
+        height: 40,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    titleText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#F94144'
+    },
+    contentView: {
+        flex: 1,
+        padding: 10
+    },
+    contentText: {
+        fontSize: 15,
+        color: '#277DA1'
     }
 })

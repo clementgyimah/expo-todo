@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { TodoDetailModalStyle } from '../assets/styles/styles';
 
 export default function TodoDetailModal({ ...props }) {
@@ -7,7 +7,7 @@ export default function TodoDetailModal({ ...props }) {
     const closeDetailModal = () => {
         props.closeModal();
     }
-
+    console.log(props.todoDetailObject.item)
     return (
         <TouchableOpacity
             style={props.showModal ? TodoDetailModalStyle.container : TodoDetailModalStyle.containerNull}
@@ -17,8 +17,13 @@ export default function TodoDetailModal({ ...props }) {
             style={TodoDetailModalStyle.modalContainer}
             onPress={() => null}
             activeOpacity={1}>
-                <View>
-                    <Text>h</Text>
+                <View style={TodoDetailModalStyle.titleView}>
+                    <Text style={TodoDetailModalStyle.titleText}>{props.todoDetailObject.item.Title}</Text>
+                </View>
+                <View style={TodoDetailModalStyle.contentView}>
+                    <ScrollView>
+                        <Text style={TodoDetailModalStyle.contentText}>{props.todoDetailObject.item.Content}</Text>
+                    </ScrollView>
                 </View>
             </TouchableOpacity>
         </TouchableOpacity>
