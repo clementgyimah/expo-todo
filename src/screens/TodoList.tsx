@@ -22,7 +22,8 @@ export const TodoList = ({ navigation }) => {
             headerRight: () => <View style={todoListStyle.headerRightView}>
                 <FeatherIcon
                     name='plus-circle'
-                    size={25} color='#0800ffab'
+                    size={25}
+                    color='#277DA1'
                     onPress={() => addTodoFunc()} />
             </View>
         })
@@ -53,7 +54,7 @@ export const TodoList = ({ navigation }) => {
 
     const removeTodoFunc = (todoID: string) => {
         console.log(todoID);
-        removeTodo({todoID, reloadTodoList: () => setReloadToggler(!reloadToggler)});
+        removeTodo({ todoID, reloadTodoList: () => setReloadToggler(!reloadToggler) });
     }
 
     return (

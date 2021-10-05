@@ -14,7 +14,7 @@ export default function TodoListModal({ ...props }) {
         if (title.length <= 0) setTitleError(true);
         else if (content.length <= 0) setContentError(true);
         else {
-            addTodo({title, content});
+            addTodo({ title, content });
             clearInputs();
             props.reloadList();
             return props.closeModal();
@@ -59,37 +59,42 @@ export default function TodoListModal({ ...props }) {
                 </View>
                 <View style={todoListModalStyle.contentView}>
                     <ScrollView>
+
                         <View style={titleError ?
                             todoListModalStyle.inputViewError :
                             todoListModalStyle.inputView}>
-                            <TextInput
-                                style={todoListModalStyle.titleInput}
-                                placeholder='Title'
-                                value={title}
-                                onChangeText={(theTitle) => titleInputFunc(theTitle)}
-                            />
-                            <Text style={todoListModalStyle.requiredText}>*</Text>
+                            <View style={todoListModalStyle.inputRow}>
+                                <TextInput
+                                    style={todoListModalStyle.titleInput}
+                                    placeholder='Title'
+                                    value={title}
+                                    onChangeText={(theTitle) => titleInputFunc(theTitle)}
+                                />
+                                <Text style={todoListModalStyle.requiredText}>*</Text>
+                            </View>
+                            {
+                                titleError &&
+                                <Text style={todoListModalStyle.inputErrorText}>'Title' cannot be empty</Text>
+                            }
                         </View>
-                        {
-                            titleError &&
-                            <Text style={todoListModalStyle.inputErrorText}>'Title' cannot be empty</Text>
-                        }
                         <View style={contentError ?
                             todoListModalStyle.inputViewError :
                             todoListModalStyle.inputView}>
-                            <TextInput
-                                style={todoListModalStyle.contentInput}
-                                placeholder='Content'
-                                value={content}
-                                onChangeText={(theContent) => contentInputFunc(theContent)}
-                                multiline
-                            />
-                            <Text style={todoListModalStyle.requiredText}>*</Text>
+                            <View style={todoListModalStyle.inputRow}>
+                                <TextInput
+                                    style={todoListModalStyle.contentInput}
+                                    placeholder='Content'
+                                    value={content}
+                                    onChangeText={(theContent) => contentInputFunc(theContent)}
+                                    multiline
+                                />
+                                <Text style={todoListModalStyle.requiredText}>*</Text>
+                            </View>
+                            {
+                                contentError &&
+                                <Text style={todoListModalStyle.inputErrorText}>'Content' cannot be empty</Text>
+                            }
                         </View>
-                        {
-                            contentError &&
-                            <Text style={todoListModalStyle.inputErrorText}>'Content' cannot be empty</Text>
-                        }
                         <View style={todoListModalStyle.saveButtonView}>
                             <TouchableOpacity
                                 style={todoListModalStyle.saveButton}

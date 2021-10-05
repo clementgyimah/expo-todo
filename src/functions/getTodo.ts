@@ -7,7 +7,6 @@ import txnSuccess from './success/txnSuccess';
 const getDataSuccess = (transaction: SQLite.SQLTransaction, results: SQLite.SQLResultSet, props: userData) => {
     console.log('All data gotten successfully: ', results.rows._array);
     props.setTheDataArray(results.rows._array);
-    // return theDataObj = results;
 }
 
 const getAllTodosCallback = (tx: SQLite.SQLTransaction, props: userData) => {
@@ -17,7 +16,7 @@ const getAllTodosCallback = (tx: SQLite.SQLTransaction, props: userData) => {
         [],
         (tran, res) => getDataSuccess(tran, res, props),
         (err) => dbError('Error in getting all data from database', err)
-    )
+    );
 }
 export function getAllTodos({ ...props }) {
     const db = SQLite.openDatabase('todoList');

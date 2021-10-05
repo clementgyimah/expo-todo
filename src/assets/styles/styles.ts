@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 
 export const todoListStyle = StyleSheet.create({
     container: {
@@ -14,8 +14,8 @@ export const todoListStyle = StyleSheet.create({
     },
     eachRowView: {
         height: 50,
-        width: 300,
-        backgroundColor: '#F0EFEB',
+        width: 0.8 * Dimensions.get('window').width,
+        backgroundColor: '#E2ECE9',
         marginTop: 10,
         alignItems: 'center',
         borderRadius: 10,
@@ -44,7 +44,7 @@ export const appStyle = StyleSheet.create({
     headerTitleStyle: {
         fontSize: 25,
         fontWeight: 'bold',
-        color: '#3d38b7ed'
+        color: '#277DA1'
     }
 })
 
@@ -82,7 +82,8 @@ export const todoListModalStyle = StyleSheet.create({
     },
     titleText: {
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: '#277DA1'
     },
     titleInput: {
         width: '80%',
@@ -103,12 +104,16 @@ export const todoListModalStyle = StyleSheet.create({
     },
     */
     inputView: {
-        flexDirection: 'row',
+        // flexDirection: 'row',
         marginVertical: 10,
+        alignItems: 'center'
     },
     inputViewError: {
+        marginTop: 10,
+        alignItems: 'center'
+    },
+    inputRow: {
         flexDirection: 'row',
-        marginTop: 10
     },
     contentInput: {
         width: '80%',
@@ -141,7 +146,7 @@ export const todoListModalStyle = StyleSheet.create({
         marginVertical: 10,
     },
     saveButton: {
-        backgroundColor: 'blue',
+        backgroundColor: '#277DA1',
         width: 100,
         height: 30,
         borderRadius: 20,
