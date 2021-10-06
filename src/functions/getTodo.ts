@@ -4,8 +4,9 @@ import { userData } from '../types/TsTypes';
 import dbError from './error/dbError';
 import txnSuccess from './success/txnSuccess';
 
-const getDataSuccess = (transaction: SQLite.SQLTransaction, results: SQLite.SQLResultSet, props: userData) => {
-    console.log('All data gotten successfully: ', results.rows._array);
+const getDataSuccess = (transaction: SQLite.SQLTransaction, results: any, props: userData) => {
+    //NB: results type is set to 'any' because the type 'SQLite.SQLResultSet' 
+    // does not have property '_array' on it's 'rows' property 
     props.setTheDataArray(results.rows._array);
 }
 

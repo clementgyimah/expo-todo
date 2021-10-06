@@ -10,7 +10,7 @@ import TodoDetailModal from '../components/TodoDetailModal';
 import { flatListItems } from '../types/TsTypes';
 import { removeTodo } from '../functions/removeTodo';
 
-export const TodoList = ({ navigation }) => {
+export const TodoList = ({ navigation } : any) => {
     const [theDataArray, setTheDataArray] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [showTodoDetailModal, setShowTodoDetailModal] = useState(false);

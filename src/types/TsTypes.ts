@@ -11,15 +11,3 @@ export interface userData {
 export interface transactionFunctions {
     executeSql: Function
 }
-
-/*
-export interface sqlResults {
-    insertId: number;
-    rowsAffected: number;
-    rows: {
-        length: number;
-        item(index: number): any;
-        _array: Array<flatListItems>
-    }
-}
-*/
