@@ -3,8 +3,12 @@ import { View, Text, TouchableOpacity, TextInput, Button } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { addTodo } from '../functions/addTodo';
 import { todoListModalStyle } from '../assets/styles/styles';
+import { useDispatch } from 'react-redux';
+import { addTodoReducer } from '../redux/features/todoFunc/addTodo';
+import UUID from 'react-native-uuid';
 
 export default function TodoListModal({ ...props }) {
+    const dispatch = useDispatch();
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [titleError, setTitleError] = useState(false);
@@ -14,9 +18,9 @@ export default function TodoListModal({ ...props }) {
         if (title.length <= 0) setTitleError(true);
         else if (content.length <= 0) setContentError(true);
         else {
-            addTodo({ title, content });
+            // addTodo({ title, content });
+            dispatch(addTodoReducer({ ID: UUID.v4(), Title: title, Content: content }))
             clearInputs();
-            props.reloadList();
             return props.closeModal();
         }
     };

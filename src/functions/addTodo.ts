@@ -1,3 +1,4 @@
+import React from 'react';
 import * as SQLite from 'expo-sqlite';
 import { userData } from '../types/TsTypes';
 import dbError from './error/dbError';

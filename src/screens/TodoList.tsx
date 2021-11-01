@@ -9,12 +9,15 @@ import TodoListModal from '../components/TodoListModal';
 import TodoDetailModal from '../components/TodoDetailModal';
 import { flatListItems } from '../types/TsTypes';
 import { removeTodo } from '../functions/removeTodo';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeTodoReducer } from '../redux/features/todoFunc/addTodo';
 
-export const TodoList = ({ navigation } : any) => {
+export const TodoList = ({ navigation }: any) => {
+    const todoListStore = useSelector(state => state.todo.value);
+    const dispatch = useDispatch();
     const [theDataArray, setTheDataArray] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [showTodoDetailModal, setShowTodoDetailModal] = useState(false);
-    const [reloadToggler, setReloadToggler] = useState(false);
     const [todoDetailObject, setTodoDetailObject] = useState({});
 
     useEffect(() => {
@@ -27,9 +30,9 @@ export const TodoList = ({ navigation } : any) => {
                     onPress={() => addTodoFunc()} />
             </View>
         })
-        getTodoList();
         verifyDb();
-    }, [reloadToggler]);
+        getTodoList();        
+    }, []);
 
     const getTodoList = () => {
         getAllTodos({ setTheDataArray: (theArray: never[]) => setTheDataArray(theArray) });
@@ -53,13 +56,13 @@ export const TodoList = ({ navigation } : any) => {
     }
 
     const removeTodoFunc = (todoID: string) => {
-        console.log(todoID);
-        removeTodo({ todoID, reloadTodoList: () => setReloadToggler(!reloadToggler) });
+        // removeTodo({ todoID, reloadTodoList: () => setReloadToggler(!reloadToggler) });
+        dispatch(removeTodoReducer({todoID}));
     }
 
     return (
         <View style={todoListStyle.container}>
-            <FlatList data={theDataArray} renderItem={(eachObject) => (
+            <FlatList data={todoListStore} renderItem={(eachObject) => (
                 <TouchableOpacity
                     style={todoListStyle.eachRowView}
                     activeOpacity={0.6}
@@ -79,8 +82,7 @@ export const TodoList = ({ navigation } : any) => {
             {showModal &&
                 <TodoListModal
                     showModal={showModal}
-                    closeModal={() => closeModal()}
-                    reloadList={() => setReloadToggler(!reloadToggler)} />
+                    closeModal={() => closeModal()} />
             }
             {showTodoDetailModal &&
                 <TodoDetailModal
