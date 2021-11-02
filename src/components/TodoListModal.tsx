@@ -18,8 +18,11 @@ export default function TodoListModal({ ...props }) {
         if (title.length <= 0) setTitleError(true);
         else if (content.length <= 0) setContentError(true);
         else {
-            // addTodo({ title, content });
-            dispatch(addTodoReducer({ ID: UUID.v4(), Title: title, Content: content }))
+            addTodo({
+                title,
+                content,
+                addTodoDispatch: () => dispatch(addTodoReducer({ ID: UUID.v4(), Title: title, Content: content }))
+            });
             clearInputs();
             return props.closeModal();
         }

@@ -18,6 +18,9 @@ export const addTodo = ({ ...props }) => {
     const db = SQLite.openDatabase('todoList');
     db.transaction((p) => addUserCallback(p, props),
         (err) => dbError('Transaction Error in inserting data into database', err),
-        () => txnSuccess('Transaction for inserting data into database started successfully...')
+        () => {
+            txnSuccess('Transaction for inserting data into database started successfully...')
+            // return props.addTodoDispatch();
+        }
     );
 }

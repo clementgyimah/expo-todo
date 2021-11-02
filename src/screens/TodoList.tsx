@@ -31,11 +31,12 @@ export const TodoList = ({ navigation }: any) => {
             </View>
         })
         verifyDb();
-        getTodoList();        
+        getTodoList();
     }, []);
 
     const getTodoList = () => {
         getAllTodos({ setTheDataArray: (theArray: never[]) => setTheDataArray(theArray) });
+        console.log('The data array: ', theDataArray);
     }
 
     const closeModal = () => {
@@ -56,8 +57,8 @@ export const TodoList = ({ navigation }: any) => {
     }
 
     const removeTodoFunc = (todoID: string) => {
-        // removeTodo({ todoID, reloadTodoList: () => setReloadToggler(!reloadToggler) });
-        dispatch(removeTodoReducer({todoID}));
+        dispatch(removeTodoReducer({ todoID }));
+        removeTodo({ todoID });
     }
 
     return (
@@ -73,7 +74,12 @@ export const TodoList = ({ navigation }: any) => {
                         </Text>
                     </View>
                     <View style={todoListStyle.deleteIconView}>
-                        <Icon name='delete' size={25} color='#F94144' onPress={() => removeTodoFunc(eachObject.item.ID)} />
+                        <Icon
+                            name='delete'
+                            size={25}
+                            color='#F94144'
+                            onPress={() => removeTodoFunc(eachObject.item.ID)}
+                        />
                     </View>
                 </TouchableOpacity>
             )}

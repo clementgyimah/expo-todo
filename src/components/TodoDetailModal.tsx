@@ -7,7 +7,7 @@ export default function TodoDetailModal({ ...props }) {
     const closeDetailModal = () => {
         props.closeModal();
     }
-    console.log(props.todoDetailObject.item)
+    // console.log(props.todoDetailObject.item)
     return (
         <TouchableOpacity
             style={props.showModal ? TodoDetailModalStyle.container : TodoDetailModalStyle.containerNull}
