@@ -1,25 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { flatListItems } from '../../../types/TsTypes';
 
 export const todoSlice = createSlice({
     name: 'todoList',
     initialState: {
-        value: [{ID: '12345', Title: 'A test title', Content: 'This is what I will do today'}]
+        value: []
     },
     reducers: {
         addTodoReducer: (state, action) => {
             state.value.push(action.payload);
         },
         removeTodoReducer: (state, action) => {
-            state.value.map((currObj, index) => {
+            state.value.map((currObj:flatListItems, index) => {
                 if (currObj.ID === action.payload.todoID){
                     return state.value.splice(index, 1);
                 } 
             });
             
+        },
+        initializeTodo: (state, action) => {
+            state.value = action.payload.theArray;
         }
     }
-})
+});
 
-export const { addTodoReducer, removeTodoReducer } = todoSlice.actions;
+export const { addTodoReducer, removeTodoReducer, initializeTodo } = todoSlice.actions;
 
 export default todoSlice.reducer;

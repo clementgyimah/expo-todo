@@ -7,4 +7,4 @@ export default configureStore({
         counter: counterReducer,
         todo: todoReducer,
     }
-})
+});

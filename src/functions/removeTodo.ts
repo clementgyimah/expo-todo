@@ -5,7 +5,7 @@ import dbError from './error/dbError';
 import txnSuccess from './success/txnSuccess';
 
 const removeTodoFunc = (tx: SQLite.SQLTransaction, props: userData) => {
-    console.log('The id: ', props.todoID);
+    // console.log('The id: ', props.todoID);
     tx.executeSql(
         'DELETE FROM users WHERE ID=?',
         [props.todoID],

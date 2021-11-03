@@ -4,13 +4,20 @@ export const todoListStyle = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
     },
     headerRightView: {
         width: 50,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    flatListStyle: {
+        // width: '100%',
+        marginVertical: 20
+    },
+    eachRowMainView: {
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     eachRowView: {
         height: 50,

@@ -1,5 +1,4 @@
 import * as SQLite from 'expo-sqlite';
-import { SQLError } from 'expo-sqlite';
 import { userData } from '../types/TsTypes';
 import dbError from './error/dbError';
 import txnSuccess from './success/txnSuccess';

@@ -7,7 +7,7 @@ import { addTodoReducer, removeTodoReducer } from '../redux/features/todoFunc/ad
 export default function Counter() {
     const count = useSelector(state => state.counter.value);
     const todoList = useSelector(state => state.todo.value);
-    console.log(todoList);
+    // console.log(todoList);
     const dispatch = useDispatch();
 
     const addStoreTodo = () => {

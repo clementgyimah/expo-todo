@@ -10,12 +10,11 @@ import TodoDetailModal from '../components/TodoDetailModal';
 import { flatListItems } from '../types/TsTypes';
 import { removeTodo } from '../functions/removeTodo';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeTodoReducer } from '../redux/features/todoFunc/addTodo';
+import { removeTodoReducer, initializeTodo } from '../redux/features/todoFunc/addTodo';
 
 export const TodoList = ({ navigation }: any) => {
     const todoListStore = useSelector(state => state.todo.value);
     const dispatch = useDispatch();
-    const [theDataArray, setTheDataArray] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [showTodoDetailModal, setShowTodoDetailModal] = useState(false);
     const [todoDetailObject, setTodoDetailObject] = useState({});
@@ -35,8 +34,8 @@ export const TodoList = ({ navigation }: any) => {
     }, []);
 
     const getTodoList = () => {
-        getAllTodos({ setTheDataArray: (theArray: never[]) => setTheDataArray(theArray) });
-        console.log('The data array: ', theDataArray);
+        getAllTodos({ setTheDataArray: (theArray: Array<Object>) => dispatch(initializeTodo({ theArray })) });
+        console.log('The data array: ', todoListStore);
     }
 
     const closeModal = () => {
@@ -57,36 +56,36 @@ export const TodoList = ({ navigation }: any) => {
     }
 
     const removeTodoFunc = (todoID: string) => {
-        console.log('See id: ', todoID);
-        
+        // console.log('See id: ', todoID);
         removeTodo({
             todoID,
             removeTodoDispatch: () => dispatch(removeTodoReducer({ todoID }))
         });
-        
     }
 
     return (
         <View style={todoListStyle.container}>
-            <FlatList data={todoListStore} renderItem={(eachObject) => (
-                <TouchableOpacity
-                    style={todoListStyle.eachRowView}
-                    activeOpacity={0.6}
-                    onPress={() => showTodoModal(eachObject)}>
-                    <View style={todoListStyle.textView}>
-                        <Text style={todoListStyle.nameText}>
-                            {eachObject.item.Title}
-                        </Text>
-                    </View>
-                    <View style={todoListStyle.deleteIconView}>
-                        <Icon
-                            name='delete'
-                            size={25}
-                            color='#F94144'
-                            onPress={() => removeTodoFunc(eachObject.item.ID)}
-                        />
-                    </View>
-                </TouchableOpacity>
+            <FlatList style={todoListStyle.flatListStyle} data={todoListStore} renderItem={(eachObject) => (
+                <View style={todoListStyle.eachRowMainView}>
+                    <TouchableOpacity
+                        style={todoListStyle.eachRowView}
+                        activeOpacity={0.6}
+                        onPress={() => showTodoModal(eachObject)}>
+                        <View style={todoListStyle.textView}>
+                            <Text style={todoListStyle.nameText}>
+                                {eachObject.item.Title}
+                            </Text>
+                        </View>
+                        <View style={todoListStyle.deleteIconView}>
+                            <Icon
+                                name='delete'
+                                size={25}
+                                color='#F94144'
+                                onPress={() => removeTodoFunc(eachObject.item.ID)}
+                            />
+                        </View>
+                    </TouchableOpacity>
+                </View>
             )}
                 keyExtractor={(item: flatListItems) => item.ID}
             />
