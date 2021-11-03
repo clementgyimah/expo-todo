@@ -7,9 +7,12 @@ import UUID from 'react-native-uuid';
 
 const addUserCallback = (tx: SQLite.SQLTransaction, props: userData) => {
     tx.executeSql(
-        `INSERT INTO users VALUES('${UUID.v4()}', '${props.title}', '${props.content}')`,
+        `INSERT INTO users VALUES("${props.id}", "${props.title}", "${props.content}")`,
         [],
-        () => txnSuccess('User added successfully'),
+        () => {
+            txnSuccess('User added successfully');
+            return props.addTodoDispatch();
+        },
         (err) => dbError('Error in inserting data into database', err)
     );
 }
@@ -19,8 +22,7 @@ export const addTodo = ({ ...props }) => {
     db.transaction((p) => addUserCallback(p, props),
         (err) => dbError('Transaction Error in inserting data into database', err),
         () => {
-            txnSuccess('Transaction for inserting data into database started successfully...')
-            // return props.addTodoDispatch();
+            return txnSuccess('Transaction for inserting data into database started successfully...');
         }
     );
 }

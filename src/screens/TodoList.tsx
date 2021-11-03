@@ -57,8 +57,13 @@ export const TodoList = ({ navigation }: any) => {
     }
 
     const removeTodoFunc = (todoID: string) => {
-        dispatch(removeTodoReducer({ todoID }));
-        removeTodo({ todoID });
+        console.log('See id: ', todoID);
+        
+        removeTodo({
+            todoID,
+            removeTodoDispatch: () => dispatch(removeTodoReducer({ todoID }))
+        });
+        
     }
 
     return (

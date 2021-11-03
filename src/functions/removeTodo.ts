@@ -10,7 +10,8 @@ const removeTodoFunc = (tx: SQLite.SQLTransaction, props: userData) => {
         'DELETE FROM users WHERE ID=?',
         [props.todoID],
         () => {
-            return txnSuccess('Todo removed successfully from database')
+            txnSuccess('Todo removed successfully from database');
+            return props.removeTodoDispatch();
             // return props.reloadTodoList();
         },
         (err) => dbError('Error in removing todo data from database', err)
