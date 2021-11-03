@@ -35,7 +35,7 @@ export const TodoList = ({ navigation }: any) => {
 
     const getTodoList = () => {
         getAllTodos({ setTheDataArray: (theArray: Array<Object>) => dispatch(initializeTodo({ theArray })) });
-        console.log('The data array: ', todoListStore);
+        // console.log('The data array: ', todoListStore);
     }
 
     const closeModal = () => {

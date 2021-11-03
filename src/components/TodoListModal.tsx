@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { addTodoReducer } from '../redux/features/todoFunc/addTodo';
 import UUID from 'react-native-uuid';
 
+// modal for adding a todo
 export default function TodoListModal({ ...props }) {
     const dispatch = useDispatch();
     const [title, setTitle] = useState('');
@@ -14,6 +15,10 @@ export default function TodoListModal({ ...props }) {
     const [titleError, setTitleError] = useState(false);
     const [contentError, setContentError] = useState(false);
 
+    /**
+     * function to save a modal into the database
+     * @returns function to close the modal
+     */
     const saveTodo = () => {
         if (title.length <= 0) setTitleError(true);
         else if (content.length <= 0) setContentError(true);
@@ -30,21 +35,39 @@ export default function TodoListModal({ ...props }) {
         }
     };
 
+    /**
+     * function for resetting all errors to 'false'
+     * @returns reset each error to 'false' if it is set to 'true'
+     */
     const resetInputErrors = () => {
         if (titleError) return setTitleError(false);
         if (contentError) return setContentError(false);
     };
 
+    /**
+     * function for clearing/emptying all inputs
+     * @returns emptying the content input
+     */
     const clearInputs = () => {
         setTitle('');
         return setContent('');
     };
 
+    /**
+     * function for handling 'title' input
+     * @param theTitle current value in title input
+     * @returns resetting all input errors
+     */
     const titleInputFunc = (theTitle: string) => {
         setTitle(theTitle);
         return resetInputErrors();
     };
 
+    /**
+     * function for handling 'content' input
+     * @param theContent current value in the content input
+     * @returns resetting all input errors
+     */
     const contentInputFunc = (theContent: string) => {
         setContent(theContent);
         return resetInputErrors();
@@ -82,6 +105,7 @@ export default function TodoListModal({ ...props }) {
                                 <Text style={todoListModalStyle.requiredText}>*</Text>
                             </View>
                             {
+                                // show input error if 'titleError' state variable is set to 'true'
                                 titleError &&
                                 <Text style={todoListModalStyle.inputErrorText}>'Title' cannot be empty</Text>
                             }
@@ -99,7 +123,8 @@ export default function TodoListModal({ ...props }) {
                                 />
                                 <Text style={todoListModalStyle.requiredText}>*</Text>
                             </View>
-                            {
+                            {   
+                                // show input error if 'contentError' state variable is set to 'true'
                                 contentError &&
                                 <Text style={todoListModalStyle.inputErrorText}>'Content' cannot be empty</Text>
                             }

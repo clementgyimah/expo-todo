@@ -2,8 +2,12 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { TodoDetailModalStyle } from '../assets/styles/styles';
 
+// modal component for showing 
 export default function TodoDetailModal({ ...props }) {
 
+    /**
+     * function to close the modal
+     */
     const closeDetailModal = () => {
         props.closeModal();
     }

@@ -1,5 +1,6 @@
 import {StyleSheet, Dimensions} from 'react-native';
 
+// styles for entire app, created with stylesheet
 export const todoListStyle = StyleSheet.create({
     container: {
       flex: 1,
@@ -12,7 +13,7 @@ export const todoListStyle = StyleSheet.create({
     },
     flatListStyle: {
         // width: '100%',
-        marginVertical: 20
+        paddingTop: 10,
     },
     eachRowMainView: {
         width: '100%',
@@ -23,7 +24,7 @@ export const todoListStyle = StyleSheet.create({
         height: 50,
         width: 0.8 * Dimensions.get('window').width,
         backgroundColor: '#E2ECE9',
-        marginTop: 10,
+        marginBottom: 10,
         alignItems: 'center',
         borderRadius: 10,
         paddingLeft: 10,
