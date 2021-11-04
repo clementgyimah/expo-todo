@@ -265,5 +265,23 @@ export const EditTodoModalStyle = StyleSheet.create({
     contentInput: {
         fontSize: 15,
         color: '#277DA1'
-    }
+    },
+    saveButtonView: {
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: 3
+    },
+    saveButton: {
+        backgroundColor: '#277DA1',
+        width: 100,
+        height: 30,
+        borderRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    saveButtonText: {
+        color: 'white',
+        fontSize: 15
+    },
 });

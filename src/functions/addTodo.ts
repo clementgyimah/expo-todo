@@ -9,12 +9,12 @@ import txnSuccess from './success/txnSuccess';
  * @param tx sql transaction object
  * @param props props from the caller function
  */
-const addUserCallback = (tx: SQLite.SQLTransaction, props: userData) => {
+const addTodoCallback = (tx: SQLite.SQLTransaction, props: userData) => {
     tx.executeSql(
         `INSERT INTO users VALUES("${props.id}", "${props.title}", "${props.content}")`,
         [],
         () => {
-            txnSuccess('User added successfully');
+            txnSuccess('Todo added successfully');
             return props.addTodoDispatch();
         },
         (err) => dbError('Error in inserting data into database', err)
@@ -27,7 +27,7 @@ const addUserCallback = (tx: SQLite.SQLTransaction, props: userData) => {
  */
 export const addTodo = ({ ...props }) => {
     const db = SQLite.openDatabase('todoList');
-    db.transaction((p) => addUserCallback(p, props),
+    db.transaction((p) => addTodoCallback(p, props),
         (err) => dbError('Transaction Error in inserting data into database', err),
         () => {
             return txnSuccess('Transaction for inserting data into database started successfully...');

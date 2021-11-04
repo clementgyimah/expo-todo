@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux'
 import { decrement, increment } from '../redux/features/counter/counterSlice';
-import { addTodoReducer, removeTodoReducer } from '../redux/features/todoFunc/addTodo';
+import { addTodoReducer, removeTodoReducer } from '../redux/features/todoFunc/todoSlice';
 
 export default function Counter() {
     const count = useSelector(state => state.counter.value);

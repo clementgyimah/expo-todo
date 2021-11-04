@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { addTodo } from '../functions/addTodo';
 import { todoListModalStyle } from '../assets/styles/styles';
 import { useDispatch } from 'react-redux';
-import { addTodoReducer } from '../redux/features/todoFunc/addTodo';
+import { addTodoReducer } from '../redux/features/todoFunc/todoSlice';
 import UUID from 'react-native-uuid';
 
 // modal for adding a todo

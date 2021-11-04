@@ -13,7 +13,7 @@ import {
 import { flatListItems } from '../types/TsTypes';
 import { removeTodo } from '../functions/removeTodo';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeTodoReducer, initializeTodo } from '../redux/features/todoFunc/addTodo';
+import { removeTodoReducer, initializeTodo } from '../redux/features/todoFunc/todoSlice';
 
 export const TodoList = ({ navigation }: any) => {
     const todoListStore = useSelector(state => state.todo.value);

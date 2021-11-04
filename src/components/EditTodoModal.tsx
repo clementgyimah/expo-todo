@@ -1,16 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import { EditTodoModalStyle } from '../assets/styles/styles';
+import UUID from 'react-native-uuid';
+import { editTodo } from '../functions/editTodo';
+import { useDispatch } from 'react-redux';
+import { editTodoReducer } from '../redux/features/todoFunc/todoSlice';
 
 // modal component for showing 
 export default function EditTodoModal({ ...props }) {
+    const dispatch = useDispatch();
+    const [IDValue, setIDValue] = useState('');
     const [titleValue, setTitleValue] = useState('');
     const [contentValue, setContentValue] = useState('');
+    const [titleError, setTitleError] = useState(false);
+    const [contentError, setContentError] = useState(false);
 
     useEffect(() => {
+        setIDValue(props.todoDetailObject.item.ID);
         setTitleValue(props.todoDetailObject.item.Title);
         setContentValue(props.todoDetailObject.item.Content);
-    }, [])
+    }, []);
 
     /**
      * function to close the modal
@@ -34,6 +43,40 @@ export default function EditTodoModal({ ...props }) {
     const handleContentInput = (currContentValue: string) => {
         setContentValue(currContentValue);
     }
+
+    /**
+     * function for clearing/emptying all inputs
+     * @returns emptying the content input
+     */
+    const clearInputs = () => {
+        setTitleValue('');
+        setIDValue('');
+        return setContentValue('');
+    }
+
+    /**
+     * function to save an edited modal into the database
+     * @returns function to close the modal
+     */
+    const saveTodo = () => {
+        if (titleValue.length <= 0) setTitleError(true);
+        else if (contentValue.length <= 0) setContentError(true);
+        else {
+            editTodo({
+                IDValue,
+                titleValue,
+                contentValue,
+                editTodoDispatch: () =>
+                    dispatch(editTodoReducer({
+                        todoID: IDValue,
+                        newTodoTitle: titleValue,
+                        newTodoContent: contentValue
+                    }))
+            });
+            clearInputs();
+            return props.closeModal();
+        }
+    };
 
     // console.log(props.todoDetailObject.item)
     return (
@@ -64,6 +107,13 @@ export default function EditTodoModal({ ...props }) {
                         />
                         {/*<Text style={EditTodoModalStyle.contentText}>{props.todoDetailObject.item.Content}</Text>*/}
                     </ScrollView>
+                    <View style={EditTodoModalStyle.saveButtonView}>
+                        <TouchableOpacity
+                            style={EditTodoModalStyle.saveButton}
+                            onPress={() => saveTodo()}>
+                            <Text style={EditTodoModalStyle.saveButtonText}>Save</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </TouchableOpacity>
         </TouchableOpacity>
