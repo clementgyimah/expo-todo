@@ -14,7 +14,6 @@ const editUserCallback = (tx: SQLite.SQLTransaction, props: userData) => {
     // console.log('The title: ', props.titleValue);
     // console.log('The Content: ', props.contentValue);
     tx.executeSql(
-        // `INSERT INTO users VALUES("${props.id}", "${props.title}", "${props.content}")`,
         `UPDATE users SET Title="${props.titleValue}", Content="${props.contentValue}" WHERE ID="${props.IDValue}"`,
         [],
         () => {

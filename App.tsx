@@ -3,7 +3,6 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TodoList } from './src/screens/TodoList';
-// import Counter from './src/test/Counter';
 import { appStyle } from './src/assets/styles/styles';
 import reduxStore from './src/redux/app/store';
 import { Provider } from 'react-redux';
