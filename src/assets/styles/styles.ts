@@ -43,8 +43,12 @@ export const todoListStyle = StyleSheet.create({
         flex: 8
     },
     deleteIconView: {
-        flex: 2,
-        alignItems: 'center',
+        flex: 3,
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+    actionIcon: {
+        marginHorizontal: 3
     }
   });
 
@@ -54,7 +58,7 @@ export const appStyle = StyleSheet.create({
         fontWeight: 'bold',
         color: '#277DA1'
     }
-})
+});
 
 export const todoListModalStyle = StyleSheet.create({
     container: {
@@ -172,7 +176,7 @@ export const todoListModalStyle = StyleSheet.create({
         marginHorizontal: 5
 
     }
-})
+});
 
 export const TodoDetailModalStyle = StyleSheet.create({
     container: {
@@ -214,4 +218,52 @@ export const TodoDetailModalStyle = StyleSheet.create({
         fontSize: 15,
         color: '#277DA1'
     }
-})
+});
+
+export const EditTodoModalStyle = StyleSheet.create({
+    container: {
+        position: 'absolute',
+        flex: 1,
+        width: '100%',
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0.5)'
+    },
+    containerNull: {
+        display: 'none'
+    },
+    modalContainer: {
+        backgroundColor: 'white',
+        width: '70%',
+        height: '70%'
+    },
+    titleView: {
+        width: '100%',
+        // backgroundColor: '#CDDAFD',
+        borderBottomWidth: 1,
+        borderBottomColor: '#4d4747',
+        height: 40,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    titleInput: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#F94144',
+        width: 200,
+        height: 30,
+        // borderBottomWidth: 1,
+        // borderBottomColor: '#277DA1',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    contentView: {
+        flex: 1,
+        padding: 10
+    },
+    contentInput: {
+        fontSize: 15,
+        color: '#277DA1'
+    }
+});

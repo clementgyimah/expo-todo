@@ -5,8 +5,11 @@ import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import FeatherIcon from '@expo/vector-icons/Feather';
 import { verifyDb } from '../functions/verifyDb';
 import { getAllTodos } from '../functions/getTodo';
-import TodoListModal from '../components/TodoListModal';
-import TodoDetailModal from '../components/TodoDetailModal';
+import {
+    TodoDetailModal,
+    TodoListModal,
+    EditTodoModal
+} from '../components/index';
 import { flatListItems } from '../types/TsTypes';
 import { removeTodo } from '../functions/removeTodo';
 import { useSelector, useDispatch } from 'react-redux';
@@ -17,6 +20,7 @@ export const TodoList = ({ navigation }: any) => {
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
     const [showTodoDetailModal, setShowTodoDetailModal] = useState(false);
+    const [showEditTodoModal, setShowEditTodoModal] = useState(false);
     const [todoDetailObject, setTodoDetailObject] = useState({});
 
     useEffect(() => {
@@ -46,13 +50,23 @@ export const TodoList = ({ navigation }: any) => {
         setShowTodoDetailModal(false);
     }
 
+
+    const closeEditTodoModal = () => {
+        setShowEditTodoModal(false);
+    }
+
     const addTodoFunc = () => {
         setShowModal(true);
     }
 
     const showTodoModal = (todoDetail: ListRenderItemInfo<flatListItems>) => {
-        setShowTodoDetailModal(true);
         setTodoDetailObject(todoDetail);
+        setShowTodoDetailModal(true);
+    }
+
+    const showEditTodoModalFunc = (todoDetail: ListRenderItemInfo<flatListItems>) => {
+        setTodoDetailObject(todoDetail);
+        setShowEditTodoModal(true);
     }
 
     const removeTodoFunc = (todoID: string) => {
@@ -62,6 +76,15 @@ export const TodoList = ({ navigation }: any) => {
             removeTodoDispatch: () => dispatch(removeTodoReducer({ todoID }))
         });
     }
+
+    const itemIcon = ({ ...props }) =>
+        <Icon
+            name={props.iconName}
+            size={25}
+            color={props.iconColor}
+            style={todoListStyle.actionIcon}
+            onPress={() => props.action()}
+        />
 
     return (
         <View style={todoListStyle.container}>
@@ -77,12 +100,16 @@ export const TodoList = ({ navigation }: any) => {
                             </Text>
                         </View>
                         <View style={todoListStyle.deleteIconView}>
-                            <Icon
-                                name='delete'
-                                size={25}
-                                color='#F94144'
-                                onPress={() => removeTodoFunc(eachObject.item.ID)}
-                            />
+                            {itemIcon({
+                                iconName: 'file-document-edit-outline',
+                                iconColor: '#F8961E',
+                                action: () => showEditTodoModalFunc(eachObject)
+                            })}
+                            {itemIcon({
+                                iconName: 'delete',
+                                iconColor: '#F94144',
+                                action: () => removeTodoFunc(eachObject.item.ID)
+                            })}
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -98,6 +125,13 @@ export const TodoList = ({ navigation }: any) => {
                 <TodoDetailModal
                     showModal={showTodoDetailModal}
                     closeModal={() => closeTodoDetailModal()}
+                    todoDetailObject={todoDetailObject}
+                />
+            }
+            {showEditTodoModal &&
+                <EditTodoModal
+                    showModal={showEditTodoModal}
+                    closeModal={() => closeEditTodoModal()}
                     todoDetailObject={todoDetailObject}
                 />
             }
