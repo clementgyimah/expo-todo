@@ -10,7 +10,7 @@ export const todoSlice = createSlice({
         value: []
     },
     reducers: {
-        addTodoReducer: (state, action) => {
+        addTodoReducer: (state: any, action) => {
             //add the new todo object to the old todo array
             state.value.push(action.payload);
         },

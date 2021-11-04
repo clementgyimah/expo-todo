@@ -16,7 +16,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { removeTodoReducer, initializeTodo } from '../redux/features/todoFunc/todoSlice';
 
 export const TodoList = ({ navigation }: any) => {
-    const todoListStore = useSelector(state => state.todo.value);
+    const todoListStore = useSelector((state: any) => state.todo.value);
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
     const [showTodoDetailModal, setShowTodoDetailModal] = useState(false);
